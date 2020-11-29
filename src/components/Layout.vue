@@ -1,26 +1,27 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
-      <slot />
+  <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
+    <div class="content" :class="classPrefix && `${classPrefix}-content`   ">
+      <slot/>
     </div>
-    <Nav />
+    <Nav/>
   </div>
 </template>
+
 <script lang="ts">
-import x from "@/assets/icons/label.svg"
-export default {
-    name:'Layout'
-}
+  export default {
+    props: ['classPrefix'],
+    name: 'Layout'
+  };
 </script>
-<style lang="scss">
-.nav-wrapper{
-    border: 1px solid green;
+
+<style lang="scss" scoped>
+  .layout-wrapper {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    .content{
-      flex-grow: 1;
-      overflow: auto;
-    }
-}
+  }
+  .content {
+    overflow: auto;
+    flex-grow: 1;
+  }
 </style>
