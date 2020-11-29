@@ -1,0 +1,18 @@
+<template>
+  <div>
+    <div class="">
+    </div>
+    <router-view />
+  </div>
+</template>
+
+<script lang="ts">
+export default {};
+</script>
+
+<style lang="scss">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+</style>
