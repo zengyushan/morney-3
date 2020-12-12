@@ -19,7 +19,7 @@ export default class Notes extends Vue{
   onValueChanged(value: string){
     this.$emit('update:value',value)
   }
-};
+}
 </script>
 
 <style lang="scss">

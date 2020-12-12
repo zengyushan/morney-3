@@ -39,7 +39,7 @@ export default class Tags extends Vue{
     }
     
   }
-};
+}
 </script>
 
 <style lang="scss">
