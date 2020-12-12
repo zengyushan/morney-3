@@ -1,35 +1,45 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li v-for="tag in dataSource" :key="tag"
+        :class="{selected:selectTags.indexOf(tag) >= 0}"
+        @click="toggle(tag)">{{tag}}</li>
+
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-export default {};
+import Vue from 'vue';
+import {Component,Prop} from "vue-property-decorator";
+
+@Component
+export default class Tags extends Vue{
+  @Prop() readonly dataSource: string[] | undefined;
+  selectTags: string[] = [];
+  toggle(tag: string){
+    const index = this.selectTags.indexOf(tag);
+    if(index >= 0){
+      this.selectTags.splice(index,1);
+    }else{
+      this.selectTags.push(tag);
+    }
+    this.$emit('update:selected',this.selectTags);
+  }
+  create(){
+    const name = window.prompt("请输入标签名");
+    console.log(name);
+    if(name === ''){
+      alert("标签名不能为空")
+    }else if(this.dataSource){
+        this.$emit("update:dataSource",[...this.dataSource,name]);
+    }
+    
+  }
+};
 </script>
 
 <style lang="scss">
@@ -51,6 +61,10 @@ export default {};
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
+      &.selected{
+        color: #fff;
+        background-color: darkgrey;
+      }
     }
   }
   > .new {
