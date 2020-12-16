@@ -1,13 +1,15 @@
 const localStorageItem = "recordList";
 const recordListModel = {
+    data: [] as RecordItem[],
     clone(data: RecordItem[] | RecordItem){
         return JSON.parse(JSON.stringify(data));
     },
     fetch() {
-        return JSON.parse(localStorage.getItem(localStorageItem) || "[]") as RecordItem[];
+        this.data = JSON.parse(localStorage.getItem(localStorageItem) || "[]") as RecordItem[];
+        return this.data;
     },
     save(data: RecordItem[]) {
-        localStorage.setItem(localStorageItem, JSON.stringify(data));
+        localStorage.setItem(localStorageItem, JSON.stringify(this.data));
     }
 }
 export { recordListModel };
